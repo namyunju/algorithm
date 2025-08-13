@@ -24,5 +24,18 @@ memo = [0] * (6+1)
 memo[0] = 0
 memo[1] = 1
 
+# 동적계획법 DP로 구현한 피보나치 코드
+def fibo2(n):
+    f = [0] * (n+1)
+    f[0] = 0
+    f[1] = 1
+    for i in range(2, n+1):
+        f[i] = f[i-1] + f[i-2]
+
+    return f[n]
+
+
+
+
 print(fibo(6)) #
 print(fibo1(6)) # 1 1 2 3 5 8
