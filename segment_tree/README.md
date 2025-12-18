@@ -2,6 +2,7 @@
 
 point update와 range query를 모두 O(logN)의 시간에 처리할 수 있는 자료구조
 
+- 주로 구간 합, 최솟값, 최댓값 구할 때 사용
 - 시간/공간 복잡도가 효율적
 - 구현 짧음
 - 다양한 변형이 가능
@@ -40,3 +41,65 @@ point update와 range query를 모두 O(logN)의 시간에 처리할 수 있는 
 - point update O(N^2)
 - range query O(1)
 
+
+3. 세그먼트 트리
+
+- 구간을 똑똑하게 나눠서 어떤 구간이 주어지든 O(logN)개의 합으로 나타낼 수 있고, 어떤 값이 바뀌어도 같이 변하는 구간은 O(logN)개임
+
+- 아래와 같은 이진트리 형태
+![alt text](segmenttree.png)
+
+- 리프노드가 배열의 실제 수, 부모 노드는 자식 노드의 합(구간합)
+
+```
+data = [1,2,3,4,5]
+n = len(data)
+
+tree = [0] * (n*4) # 0이 20개
+
+def build(node, start, end):
+    # 주어진 배열 idx
+    if start == end:
+        tree[node] = data[start]
+        return
+
+
+    mid = (start+end) // 2
+    build(node*2, start, mid)
+    build(node*2+1, mid+1, end)
+
+    tree[node] = tree[node*2] + tree[node*2+1]
+
+# 루트 노드 1번, 0부터 n-1 인덱스까지
+build(1, 0, n-1)
+print(tree)
+
+# 구간 합
+# 구하고자 하는 구간 : start ~ end
+# 현재 노드 범위 : left ~ right
+def query(node, start, end, left, right):
+    if left > end or right < start:
+        return 0
+
+    if left <= start and end <= right:
+        return tree[node]
+
+    mid = (start+end) // 2
+    return query(node*2, start, mid, left, right) + query(node*2+1, mid+1, end, left, right)
+
+# data 배열의 idx번째 수를 val로 변환
+# tree에서 해당 node를 포함하는 node를 업데이트
+# 리프노드부터 올라오면서 부모노드를 갱신
+def update(node, start, end, idx, val):
+    if start == end:
+        tree[node] = val
+        data[idx] = val
+
+    mid = (start+end) // 2
+    if idx <= mid:
+        update(node*2, start, mid, idx, val)
+    else:
+        update(node*2+1, mid+1, end, idx, val)
+
+    tree[node] = tree[node*2] + tree[node*2+1]
+```
