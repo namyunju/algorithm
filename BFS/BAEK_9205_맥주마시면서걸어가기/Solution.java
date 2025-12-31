@@ -51,5 +51,6 @@ class Solution {
             System.out.println(success ? "happy" : "sad");
             
         }
+        sc.close();
     }
 }

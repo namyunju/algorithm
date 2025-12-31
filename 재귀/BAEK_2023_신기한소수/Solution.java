@@ -32,5 +32,6 @@ class Solution {
         dfs(3,1);
         dfs(5,1);
         dfs(7,1);
+        sc.close();
     }
 }

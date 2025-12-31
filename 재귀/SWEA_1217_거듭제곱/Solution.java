@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
  
 class Solution
@@ -20,5 +21,6 @@ class Solution
             int ans = solve(N,M,1);
             System.out.println("#"+tc + " " + ans);
         }
+        sc.close();
     }
 }
