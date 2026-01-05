@@ -40,3 +40,10 @@ public class Main {
         }
     }
 }
+
+// 피드백
+// HashSet의 add() 메서드는 데이터가 잘 들어갔으면 true, 이미 있는 데이터면 false를 반환함
+// Set<String> tempSet = new HashSet<>();
+// boolean isPossible = true;
+// if (!tempSet.add(sub)) {isPossible=false; break;} 
+// 위 방식으로 중복된 번호 발견 시 바로 다음 k 값으로 넘어가는 방식으로 가지치기 가능

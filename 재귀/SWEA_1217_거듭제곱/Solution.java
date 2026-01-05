@@ -1,3 +1,4 @@
+package 재귀.SWEA_1217_거듭제곱;
 
 import java.util.Scanner;
  
