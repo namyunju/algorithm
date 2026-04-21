@@ -34,3 +34,60 @@
 ## 구조체 
 
 ### 기본 구조체
+```cpp
+// 구조체 정의 (타입 정의. 메모리 할당은 X)
+struct Student {
+    int id;
+    char name[50];
+    double gpa;
+};
+
+// 구조체 변수 선언 (스택에 메모리 할당됨)
+Student s1;
+// 메모리상 상태
+// s1 => [id: ?] [name: ??] [gpa: ?]
+```
+
+### 구조체 멤버 접근 : .연산자
+```cpp
+
+Student s1;
+s1.id = 202401;
+strcpy(s1.name, "윤주");
+s1.gpa = 4.5;
+
+printf("ID: %d\n", s1.id);
+```
+
+### 구조체 배열
+여러 학생을 저장하고 싶을 때
+```cpp
+Student students[10];
+students[0].id = 202401;
+strcpy(students[0].name, "윤주");
+students[0].gpa = 4.5;
+```
+
+### 구조체 포인터 : 동적 할당
+```cpp
+//포인터 변수 선언
+Student *ptr;
+//동적할당
+ptr = (Student *)malloc(sizeof(Student));
+
+// 메모리상 상태:
+// 힙에 새로운 메모리 할당됨
+// 주소 1000번지 : [id][name][gpa]
+// ptr => [주소값:1000]
+
+ptr->id = 202403;
+strcpy(ptr->name, "김철수");
+ptr->gpa = 3.9
+
+printf("ID: %d\n", ptr->id);
+
+// 메모리 해제
+free(ptr); // 힙에서 메모리 반환
+ptr = NULL; // 포인터 초기화
+```
+
